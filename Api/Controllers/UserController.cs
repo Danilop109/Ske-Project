@@ -66,7 +66,7 @@ namespace Api.Controllers
     }
 
     [HttpPost]
-    [Authorize(Roles = "Administrador")]
+    // [Authorize(Roles = "Administrador")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -119,7 +119,7 @@ namespace Api.Controllers
 
 
     [HttpPost("register")]
-    [Authorize(Roles = "Administrador")]
+    // [Authorize(Roles = "Administrador")]
     public async Task<ActionResult> RegisterAsync(RegisterDto model)
     {
         var result = await _userService.RegisterAsync(model);
@@ -135,7 +135,7 @@ namespace Api.Controllers
     }
 
     [HttpPost("addrole")]
-    [Authorize(Roles = "Administrador")]
+    // [Authorize(Roles = "Administrador")]
     public async Task<IActionResult> AddRoleAsync(AddRoleDto model)
     {
         var result = await _userService.AddRoleAsync(model);
