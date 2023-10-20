@@ -165,4 +165,197 @@ namespace Api.Controllers
     }
     
     }
+
+    // [HttpGet]
+    // [MapToApiVersion("1.0")]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+
+    // public async Task<ActionResult<IEnumerable<MascotaDto>>> Get()
+    // {
+    //     var entidad = await _unitOfWork.Mascotas.GetAllAsync();
+    //     return _mapper.Map<List<MascotaDto>>(entidad);
+    // }
+
+
+    // [HttpGet("{id}")]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+
+    // public async Task<ActionResult<MascotaDto>> Get(int id)
+    // {
+    //     var entidad = await _unitOfWork.Mascotas.GetByIdAsync(id);
+    //     if (entidad == null){
+    //         return NotFound();
+    //     }
+    //     return _mapper.Map<MascotaDto>(entidad);
+    // }
+
+
+    // [HttpGet]
+    // [MapToApiVersion("1.1")]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // public async Task<ActionResult<Pager<MascotaDto>>> GetPagination([FromQuery] Params paisParams)
+    // {
+    //     var entidad = await _unitOfWork.Mascotas.GetAllAsync(paisParams.PageIndex, paisParams.PageSize, paisParams.Search);
+    //     var listEntidad = _mapper.Map<List<MascotaDto>>(entidad.registros);
+    //     return new Pager<MascotaDto>(listEntidad, entidad.totalRegistros, paisParams.PageIndex, paisParams.PageSize, paisParams.Search);
+    // }
+    // //CONSULTA 3
+    // [HttpGet("GetPetEspecie")]
+    // [MapToApiVersion("1.0")]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // public async Task<ActionResult<object>> GetPetEspecieConsulta3()
+    // {
+    //     var entidad = await _unitOfWork.Mascotas.GetPetEspecie();
+    //     var dto = _mapper.Map<IEnumerable<object>>(entidad);
+    //     return Ok(dto);
+    // }
+
+
+    // [HttpGet("GetPetEspecie")]
+    // [MapToApiVersion("1.1")]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // public async Task<ActionResult<Pager<object>>> GetPetEspecieConsulta3Pag([FromQuery] Params Parameters)
+    // {
+    //     var entidad = await _unitOfWork.Mascotas.GetPetEspecie(Parameters.PageIndex, Parameters.PageSize, Parameters.Search);
+    //     var listEntidad = _mapper.Map<List<object>>(entidad.registros);
+    //     return Ok(new Pager<object>(listEntidad, entidad.totalRegistros, Parameters.PageIndex, Parameters.PageSize, Parameters.Search));
+    // }
+
+
+    // //CONSULTA B-1
+    // [HttpGet("GetPetGropuByEspe")]
+    // [MapToApiVersion("1.0")]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // public async Task<ActionResult<object>> GetPetGropuByEspeConsultaB1()
+    // {
+    //     var entidad = await _unitOfWork.Mascotas.GetPetGropuByEspe();
+    //     var dto = _mapper.Map<IEnumerable<object>>(entidad);
+    //     return Ok(dto);
+    // }
+
+
+    // [HttpGet("GetPetGropuByEspe")]
+    // [MapToApiVersion("1.1")]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // public async Task<ActionResult<Pager<object>>> GetPetGropuByEspeConsultaB1Pag([FromQuery] Params Parameters)
+    // {
+    //     var entidad = await _unitOfWork.Mascotas.GetPetGropuByEspe(Parameters.PageIndex, Parameters.PageSize, Parameters.Search);
+    //     var listEntidad = _mapper.Map<List<object>>(entidad.registros);
+    //     return Ok(new Pager<object>(listEntidad, entidad.totalRegistros, Parameters.PageIndex, Parameters.PageSize, Parameters.Search));
+    // }
+
+
+    // //CONSULTA B-3
+    // [HttpGet("GetPetForVet")]
+    // [MapToApiVersion("1.0")]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // public async Task<ActionResult<object>> GetPetForVetConsultaB3()
+    // {
+    //     var entidad = await _unitOfWork.Mascotas.GetPetForVet();
+    //     var dto = _mapper.Map<IEnumerable<object>>(entidad);
+    //     return Ok(dto);
+    // }
+
+
+    // [HttpGet("GetPetForVet")]
+    // [MapToApiVersion("1.1")]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // public async Task<ActionResult<Pager<object>>> GetPetForVetConsultaB3Pag([FromQuery] Params Parameters)
+    // {
+    //     var entidad = await _unitOfWork.Mascotas.GetPetForVet(Parameters.PageIndex, Parameters.PageSize, Parameters.Search);
+    //     var listEntidad = _mapper.Map<List<object>>(entidad.registros);
+    //     return Ok(new Pager<object>(listEntidad, entidad.totalRegistros, Parameters.PageIndex, Parameters.PageSize, Parameters.Search));
+    // }
+
+
+    // //CONSULTA B-5
+    // [HttpGet("GetPetProRazaGoldenRetriever")]
+    // [MapToApiVersion("1.0")]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // public async Task<ActionResult<object>> GetPetProRazaGoldenRetrieverConsultaB5()
+    // {
+    //     var entidad = await _unitOfWork.Mascotas.GetPetProRazaGoldenRetriever();
+    //     var dto = _mapper.Map<IEnumerable<object>>(entidad);
+    //     return Ok(dto);
+    // }
+
+
+    // [HttpGet("GetPetProRazaGoldenRetriever")]
+    // [MapToApiVersion("1.1")]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // public async Task<ActionResult<IEnumerable<object>>> GetPetProRazaGoldenRetrieverConsultab5([FromQuery] Params Parameters)
+    // {
+    //     var entidad = await _unitOfWork.Mascotas.GetPetProRazaGoldenRetriever(Parameters.PageIndex, Parameters.PageSize, Parameters.Search);
+    //     var listEntidad = _mapper.Map<List<object>>(entidad.registros);
+    //     return Ok(new Pager<object>(listEntidad, entidad.totalRegistros, Parameters.PageIndex, Parameters.PageSize, Parameters.Search));
+    // }
+
+
+    // [HttpPost]
+    // [ProducesResponseType(StatusCodes.Status201Created)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+
+    // public async Task<ActionResult<Mascota>> Post(MascotaDto mascotaDto)
+    // {
+    //     var entidad = this._mapper.Map<Mascota>(mascotaDto);
+    //     this._unitOfWork.Mascotas.Add(entidad);
+    //     await _unitOfWork.SaveAsync();
+    //     if(entidad == null)
+    //     {
+    //         return BadRequest();
+    //     }
+    //     mascotaDto.Id = entidad.Id;
+    //     return CreatedAtAction(nameof(Post), new {id = mascotaDto.Id}, mascotaDto);
+    // }
+
+
+    // [HttpPut("{id}")]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+
+    // public async Task<ActionResult<MascotaDto>> Put(int id, [FromBody]MascotaDto mascotaDto){
+    //     if(mascotaDto == null)
+    //     {
+    //         return NotFound();
+    //     }
+    //     var entidad = this._mapper.Map<Mascota>(mascotaDto);
+    //     _unitOfWork.Mascotas.Update(entidad);
+    //     await _unitOfWork.SaveAsync();
+    //     return mascotaDto;
+    // }
+
+
+    // [HttpDelete("{id}")]
+    // [ProducesResponseType(StatusCodes.Status204NoContent)]
+    // [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+
+    // public async Task<IActionResult> Delete(int id){
+    //     var entidad = await _unitOfWork.Mascotas.GetByIdAsync(id);
+    //     if(entidad == null)
+    //     {
+    //         return NotFound();
+    //     }
+    //     _unitOfWork.Mascotas.Remove(entidad);
+    //     await _unitOfWork.SaveAsync();
+    //     return NoContent();
+    // }
+
 }

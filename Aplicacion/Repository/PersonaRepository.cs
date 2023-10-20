@@ -23,8 +23,6 @@ namespace Aplicacion.Repository
         {
             return await _context.Personas
             .Include(p => p.TipoPersona)
-            .Include(p => p.TipoDocumento)
-            .Include(p => p.Rol)
             .ToListAsync();
         }
 
@@ -32,8 +30,6 @@ namespace Aplicacion.Repository
         {
             return await _context.Personas
             .Include(p => p.TipoPersona)
-            .Include(p => p.TipoDocumento)
-            .Include(p => p.Rol)
             .FirstOrDefaultAsync(p => p.Id == id);
         }
 
