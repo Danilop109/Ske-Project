@@ -63,6 +63,41 @@ namespace Persistencia.Data.Configurations
             .WithOne(p => p.User)
             .HasForeignKey(p => p.UserId);
 
-        }
+        //     public class ApplicationDbContext : DbContext
+        // {
+        //     public DbSet<Usuario> Usuarios { get; set; }
+        //     public DbSet<Perfil> Perfiles { get; set; }
+
+        //     protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //     {
+        //         // Definir la relación uno a uno entre Usuario y Perfil
+        //         modelBuilder.Entity<Usuario>()
+        //             .HasOne(u => u.Perfil)
+        //             .WithOne(p => p.Usuario)
+        //             .HasForeignKey<Perfil>(p => p.UsuarioId);
+
+        //         base.OnModelCreating(modelBuilder);
+        //     }
+        // }
+
+        // public class Usuario
+        // {
+        //     public int Id { get; set; }
+        //     public string Nombre { get; set; }
+
+        //     // Propiedad de navegación para el perfil
+        //     public Perfil Perfil { get; set; }
+        // }
+
+        // public class Perfil
+        // {
+        //     public int Id { get; set; }
+        //     public string Descripcion { get; set; }
+
+        //     // Propiedad de navegación inversa para el usuario
+        //     public Usuario Usuario { get; set; }
+        //     public int UsuarioId { get; set; } // Clave foránea para la relación
+        // }
     }
+}
 }

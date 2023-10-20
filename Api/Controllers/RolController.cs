@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers;
     [ApiVersion("1.0")]
     [ApiVersion("1.1")]
-    [Authorize]
+    // [Authorize]
 public class RolController : BaseApiController
 {   
     private readonly IUnitOfWork unitofwork;

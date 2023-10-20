@@ -143,7 +143,7 @@ namespace Api.Controllers
     }
 
     [HttpPost("refresh-token")]
-    [Authorize]
+    // [Authorize]
     public async Task<IActionResult> RefreshToken()
     {
         var refreshToken = Request.Cookies["refreshToken"];
