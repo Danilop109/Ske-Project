@@ -16,24 +16,23 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Api.Services
 {
-    public class UserService : IUserService
-    {
-        private readonly JWT _jwt;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IPasswordHasher<User> _passwordHasher;
-        public UserService(IUnitOfWork unitOfWork, IOptions<JWT> jwt, IPasswordHasher<User> passwordHasher)
+    public class UserService: IUserService
+{
+    private readonly JWT _jwt;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IPasswordHasher<User> _passwordHasher;
+    public UserService(IUnitOfWork unitOfWork, IOptions<JWT> jwt, IPasswordHasher<User> passwordHasher)
     {
         _jwt = jwt.Value;
         _unitOfWork = unitOfWork;
         _passwordHasher = passwordHasher;
     }
-
     public async Task<string> RegisterAsync(RegisterDto registerDto)
     {
         var user = new User
         {
-            Email = registerDto.Email,
-            Username = registerDto.Username
+            Username = registerDto.Username,
+            Email = registerDto.Email
         };
 
         user.Password = _passwordHasher.HashPassword(user, registerDto.Password); //Encrypt password
@@ -44,13 +43,13 @@ namespace Api.Services
 
         if (existingUser == null)
         {
-            var rolDefault = _unitOfWork.Roles
+            /* var rolDefault = _unitOfWork.Roles
                                     .Find(u => u.Nombre == Authorization.rol_default.ToString())
-                                    .First();
+                                    .First(); */
             try
             {
-                user.Rols.Add(rolDefault);
-                _unitOfWork.Users.Add(user);
+/*                 user.Rols.Add(rolDefault);
+ */                _unitOfWork.Users.Add(user);
                 await _unitOfWork.SaveAsync();
 
                 return $"User  {registerDto.Username} has been registered successfully";
@@ -86,7 +85,6 @@ namespace Api.Services
             dataUserDto.IsAuthenticated = true;
             JwtSecurityToken jwtSecurityToken = CreateJwtToken(user);
             dataUserDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-            dataUserDto.Email = user.Email;
             dataUserDto.UserName = user.Username;
             dataUserDto.Roles = user.Rols
                                             .Select(u => u.Nombre)
@@ -111,7 +109,7 @@ namespace Api.Services
             return dataUserDto;
         }
         dataUserDto.IsAuthenticated = false;
-        dataUserDto.Message = $"Credenciales incorrectas para el usuario {user.Username}.";
+        dataUserDto.Message = $"Credenciales incorrectas para el User {user.Username}.";
         return dataUserDto;
     }
     public async Task<string> AddRoleAsync(AddRoleDto model)
@@ -134,8 +132,7 @@ namespace Api.Services
 
             if (rolExists != null)
             {
-                var userHasRole = user.Rols
-                                            .Any(u => u.Id == rolExists.Id);
+                var userHasRole = user.Rols.Any(u => u.Id == rolExists.Id);
 
                 if (userHasRole == false)
                 {
@@ -155,17 +152,17 @@ namespace Api.Services
     {
         var dataUserDto = new DataUserDto();
 
-        var usuario = await _unitOfWork.Users
+        var User = await _unitOfWork.Users
                         .GetByRefreshTokenAsync(refreshToken);
 
-        if (usuario == null)
+        if (User == null)
         {
             dataUserDto.IsAuthenticated = false;
             dataUserDto.Message = $"Token is not assigned to any user.";
             return dataUserDto;
         }
 
-        var refreshTokenBd = usuario.RefreshTokens.Single(x => x.Token == refreshToken);
+        var refreshTokenBd = User.RefreshTokens.Single(x => x.Token == refreshToken);
 
         if (!refreshTokenBd.IsActive)
         {
@@ -177,16 +174,18 @@ namespace Api.Services
         refreshTokenBd.Revoked = DateTime.UtcNow;
         //generate a new refresh token and save it in the database
         var newRefreshToken = CreateRefreshToken();
-        usuario.RefreshTokens.Add(newRefreshToken);
-        _unitOfWork.Users.Update(usuario);
+        User.RefreshTokens.Add(newRefreshToken);
+        _unitOfWork.Users.Update(User);
         await _unitOfWork.SaveAsync();
         //Generate a new Json Web Token
         dataUserDto.IsAuthenticated = true;
-        JwtSecurityToken jwtSecurityToken = CreateJwtToken(usuario);
+        JwtSecurityToken jwtSecurityToken = CreateJwtToken(User);
         dataUserDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-        dataUserDto.Email = usuario.Email;
-        dataUserDto.UserName = usuario.Username;
-        dataUserDto.Roles = usuario.Rols
+        /*         dataUserDto.Email = User.Email;
+         */
+        dataUserDto.UserName = User.Username;
+        dataUserDto.Email = User.Email;
+        dataUserDto.Roles = User.Rols
                                         .Select(u => u.Nombre)
                                         .ToList();
         dataUserDto.RefreshToken = newRefreshToken.Token;
@@ -207,9 +206,9 @@ namespace Api.Services
             };
         }
     }
-    private JwtSecurityToken CreateJwtToken(User usuario)
+    private JwtSecurityToken CreateJwtToken(User User)
     {
-        var roles = usuario.Rols;
+        var roles = User.Rols;
         var roleClaims = new List<Claim>();
         foreach (var role in roles)
         {
@@ -217,10 +216,10 @@ namespace Api.Services
         }
         var claims = new[]
         {
-                                new Claim(JwtRegisteredClaimNames.Sub, usuario.Username),
+                                new Claim(JwtRegisteredClaimNames.Sub, User.Username),
                                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                                new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
-                                new Claim("uid", usuario.Id.ToString())
+                                new Claim(JwtRegisteredClaimNames.Email, User.Email),
+                                new Claim("uid", User.Id.ToString())
                         }
         .Union(roleClaims);
         var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwt.Key));
@@ -233,6 +232,5 @@ namespace Api.Services
             signingCredentials: signingCredentials);
         return jwtSecurityToken;
     }
-
     }
 }

@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+  <None Include="Data\Csv\**" CopyToOutputDirectory="PreserveNewest" />
     <ProjectReference Include="..\Dominio\Dominio.csproj" />
   </ItemGroup>
 
